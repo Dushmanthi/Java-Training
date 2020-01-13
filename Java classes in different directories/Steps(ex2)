@@ -1,0 +1,25 @@
+_____________________________________________________
+Compile and Run java files in different directories
+_____________________________________________________
+
+There are 3 different directories such as A,B and C
+
+B -> Course.java 
+then create -> package B;
+here we created -> print()
+inside print method -> System.out.println("Hello Java");
+compile this file using -> javac -d "ClassFiles" 002\B\Course.java
+
+C-Student.java
+here we created -> package C;
+then -> import B.Course;
+compile this using -> javac -d "ClassFiles" -classpath "ClassFiles"  002\C\Student.java
+
+A - Application.java is the main class. 
+create -> package A;
+then -> import C.Student;
+then compile it using: javac -d "ClassFiles" -classpath "ClassFiles"  002\A\Application.java
+
+To run the program -> java -classpath "ClassFiles" A/Application
+
+output: Hello Java
