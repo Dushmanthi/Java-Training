@@ -10,7 +10,7 @@ public class FrogQuestion{
             int timeSpent = 0;
             int distanceTraveled = 0;
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter 'd' to get distance(meter) or enter 't' to get time(second) :");
+            System.out.print("Enter 'd' to calculate the distance(meter) or enter 't' to calculate the time(second) :");
             String s =scanner.next();
 
             if(s.equals("d")){
