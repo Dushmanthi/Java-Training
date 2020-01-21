@@ -19,7 +19,7 @@ public class TestStudent {
                         .map(s -> new Student(s.getName(), s.getMarks() ))
                         .filter(s -> s.getMarks() > 60 )
                         .sorted(Comparator.comparing(Student::getName))
-                        .collect(Collection.toList() );
+                        .collect(Collectors.toList() );
 
         System.out.print(mapStudent);     
     }  
