@@ -9,11 +9,11 @@ public class TestStudent {
     
         List<Student> studentList = new ArrayList<>();  
         
-        studentList.add(new Employee("Jonny",90));  
-        studentList.add(new Employee("Mike",85));  
-        studentList.add(new Employee("Leena",92));  
-        studentList.add(new Employee("Alice", 55));  
-        studentList.add(new Employee("Bob", 77));   
+        studentList.add(new Student("Jonny",90));  
+        studentList.add(new Student("Mike",85));  
+        studentList.add(new Student("Leena",92));  
+        studentList.add(new Student("Alice", 55));  
+        studentList.add(new Student("Bob", 77));   
         
         List<Student> mapStudent = studentList.stream()
                         .map(s -> new Student(e.getName(), e.getMarks() ))
