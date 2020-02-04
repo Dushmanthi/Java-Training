@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<context:property-placeholder location="application.properties"/>
+	
+<bean name="employeeRepository"
+		class="com.spring.training.salesmanager.repository.HibernateEmployeeRepositoryImpl" />	
+		
+		
+	<bean name="employeeService"
+	<!--	class="com.spring.training.salesmanager.service.EmployeeServiceImpl" autowire="byName" scope="prototype">-->
+		class="com.spring.training.salesmanager.service.EmployeeServiceImpl" autowire="byName" >
+	</bean>	
+		
+</beans>		
