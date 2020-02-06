@@ -18,7 +18,7 @@ import com.spring.training.salesmanager.service.EmployeeServiceImpl;
 public class ApplicationConfiguration {
 	@Bean(name = "employeeService")
 	//@Scope("singleton")
-	//@Scope("prototype")
+	@Scope("prototype")
 	public EmployeeService getEmployeeService() {
 		
 		//EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
