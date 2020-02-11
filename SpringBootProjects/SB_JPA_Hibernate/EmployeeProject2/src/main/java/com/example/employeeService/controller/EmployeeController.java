@@ -20,20 +20,7 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService employeeService;
 	
-//	@RequestMapping("/save")
-//	public Employee employeeDetails() {
-//		//employee details
-//		Employee employee = new Employee();
-//		employee.setName("Dushi");
-//		employee.setCity("Gampaha");
-//		
-		//address details
-//		Address address = new Address();
-//		address.
-//		employee.setAddress(address);
-//		return employee;
-//}
-	 @RequestMapping(value = "/save", method = RequestMethod.POST)
+	 @RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
 	    public Employee save(@RequestBody Employee employee) {
 	        return employeeService.createEmployee(employee);
 	    }
