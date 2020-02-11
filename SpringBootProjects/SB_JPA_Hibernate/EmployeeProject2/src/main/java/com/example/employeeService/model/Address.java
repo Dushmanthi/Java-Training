@@ -15,14 +15,14 @@ public class Address {
 	Integer id;
 	String street;
 	String city;
+	
 	//OneToOne
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "empId")
 	Employee employee;
 	
 	
-	
-	
+	//employee
 	public Employee getEmployee() {
 		return employee;
 	}
@@ -30,13 +30,6 @@ public class Address {
 		this.employee = employee;
 	}
 	
-	
-//	public Address(Integer id, String street, String city) {
-//
-//		this.id = id;
-//		this.street = street;
-//		this.city = city;
-//	}
 	public Integer getId() {
 		return id;
 	}

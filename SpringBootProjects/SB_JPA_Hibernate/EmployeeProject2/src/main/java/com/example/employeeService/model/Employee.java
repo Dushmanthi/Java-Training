@@ -10,9 +10,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Employee {
@@ -20,30 +27,34 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	String name;
-	String city;
+	String age;
 	
 	//OneToOne
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "employee")
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "employee",fetch = FetchType.EAGER)
 	Address address;
 	
 	//OneToMany
 	@OneToMany(mappedBy = "employee")
 	List<Telephone> telephone;
 	
+	//ManyToManys
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JsonIgnore
+	@JoinTable(name = "employee_project",
+				joinColumns = {@JoinColumn(name = "empId", referencedColumnName = "id") },
+				inverseJoinColumns = {@JoinColumn(name = "proId", referencedColumnName = "id") })
 	
-	@ManyToMany(mappedBy = "employee",fetch = FetchType.LAZY)
-	Set<Projects> projects = new HashSet<Projects>();
+	@Fetch(value = FetchMode.SUBSELECT)
+	List<Projects> projects;
 	
-	
-	public Set<Projects> getProjects() {
+	//project
+	public List<Projects> getProjects() {
 		return projects;
 	}
-	public void setProjects(Set<Projects> projects) {
+	public void setProjects(List<Projects> projects) {
 		this.projects = projects;
 	}
-	
-	
-	
+	//telephone
 	public List<Telephone> getTelephone() {
 		return telephone;
 	}
@@ -51,7 +62,7 @@ public class Employee {
 	public void setTelephone(List<Telephone> telephone) {
 		this.telephone = telephone;
 	}
-
+	//address
 	public Address getAddress() {
 		return address;
 	}
@@ -60,13 +71,7 @@ public class Employee {
 		this.address = address;
 	}
 
-//	public Employee(Integer id, String name, String city) {
-//		
-//		this.id = id;
-//		this.name = name;
-//		this.city = city;
-//	}
-	
+	//employee
 	public Integer getId() {
 		return id;
 	}
@@ -79,24 +84,13 @@ public class Employee {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCity() {
-		return city;
+	public String getAge() {
+		return age;
 	}
-	public void setCity(String city) {
-		this.city = city;
+	public void setAge(String age) {
+		this.age = age;
 	}
 	
 	
-
-//	public static List<Employee> getAllEmployees() {
-//		List<Employee> employeeList = new ArrayList<Employee>();
-//
-//		employeeList.add(new Employee("Jonny", 90));
-//		employeeList.add(new Employee("Mike", 85));
-//		employeeList.add(new Employee("Leena", 92));
-//		employeeList.add(new Employee("Alice", 55));
-//		employeeList.add(new Employee("Bob", 77));
-//		return employeeList;
-//	}
 
 }

@@ -1,7 +1,6 @@
 package com.example.employeeService.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -20,18 +19,17 @@ public class Projects {
 	Integer id;
 	String projectName;
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "employee")
+	List<Employee> employee;
 	
-	@JoinTable(name = "emp_project", joinColumns = {
-			@JoinColumn(name = "empId", referencedColumnName = "id") }, inverseJoinColumns = {
-					@JoinColumn(name = "proId", referencedColumnName = "id") })
-	
-	Set<Employee> employee = new HashSet<>();
-
-	public Projects(Integer id, String projectName) {
-		this.id = id;
-		this.projectName = projectName;
+	//employee
+	public List<Employee> getEmployee() {
+		return employee;
 	}
+	public void setEmployee(List<Employee> employee) {
+		this.employee = employee;
+	}
+	//project
 	public Integer getId() {
 		return id;
 	}

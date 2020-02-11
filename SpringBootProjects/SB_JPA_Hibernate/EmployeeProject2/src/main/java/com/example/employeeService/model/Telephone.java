@@ -20,22 +20,19 @@ public class Telephone {
 	String number;
 	
 	//ManyToOne
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "empId")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn
     @JsonIgnore
-	List<Employee> employee;
+	Employee employee;
 	
 	
-	public List<Employee> getEmployee() {
+	public Employee getEmployee() {
 		return employee;
 	}
-	public void setEmployee(List<Employee> employee) {
+	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-	public Telephone(Integer id, String number) {
-		this.id = id;
-		this.number = number;
-	}
+	
 	public Integer getId() {
 		return id;
 	}
