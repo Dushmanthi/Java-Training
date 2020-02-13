@@ -1,5 +1,6 @@
 package com.example.employeeService.model;
 
+import java.beans.Transient;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,6 +22,8 @@ import org.hibernate.annotations.FetchMode;
 
 import com.example.employeeService.sharedModel.Allocation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class Employee {
@@ -32,25 +35,24 @@ public class Employee {
 	
 	//OneToOne
 	@OneToOne(cascade = CascadeType.ALL,mappedBy = "employee",fetch = FetchType.EAGER)
+	@JsonIgnore
 	Address address;
-	
+
 	//OneToMany
-	@OneToMany(mappedBy = "employee")
+	@OneToMany(mappedBy = "employee",cascade =CascadeType.ALL) //targetEntity =Telephone.class,
 	List<Telephone> telephone;
 	
 	//ManyToManys
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	@JsonIgnore
-	@JoinTable(name = "employee_project",
-				joinColumns = {@JoinColumn(name = "empId", referencedColumnName = "id") },
-				inverseJoinColumns = {@JoinColumn(name = "proId", referencedColumnName = "id") })
-	
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "employee")
+
 	@Fetch(value = FetchMode.SUBSELECT)
 	List<Projects> projects;
 	
 	
 	//Allocation
-    Allocation[] allocation;
+	//@Transient
+	Allocation[] allocation;
 	
 	public Allocation[] getAllocation() {
 		return allocation;

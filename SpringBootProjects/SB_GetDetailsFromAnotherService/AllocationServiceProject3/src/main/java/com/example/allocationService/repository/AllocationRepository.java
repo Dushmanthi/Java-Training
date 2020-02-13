@@ -10,5 +10,5 @@ import com.example.allocationService.model.Allocation;
 @Repository
 public interface AllocationRepository extends JpaRepository<Allocation, Integer> {
 	
-	List<Allocation> findByEmployeeId(Integer id);
+	List<Allocation> findByEmpId(Integer id);
 }

@@ -1,5 +1,7 @@
 package com.example.employeeService.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,7 +21,11 @@ public class Projects {
 	Integer id;
 	String projectName;
 	
-	@ManyToMany(mappedBy = "employee")
+	@ManyToMany
+	@JsonIgnore
+	@JoinTable(name = "employee_project",
+			joinColumns = {@JoinColumn(name = "proId", referencedColumnName = "id") },
+			inverseJoinColumns = {@JoinColumn(name = "empId", referencedColumnName = "id") })
 	List<Employee> employee;
 	
 	//employee

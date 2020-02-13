@@ -18,56 +18,49 @@ import com.example.employeeService.repository.EmployeeRepository;
 import com.example.employeeService.sharedModel.Allocation;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
-	@Autowired
-	EmployeeRepository employeeRepository;
-	
-	@Bean
-	RestTemplate getRestTemplate() {
-		return new RestTemplate();
-	}
-	
-	@Autowired
-	RestTemplate restTemplate;
-	
-	@Override
-	public Employee createEmployee(Employee employee) {
-		return employeeRepository.save(employee);
-	}
-	@Override
-	public List<Employee> findAllEmployees() {
-		return employeeRepository.findAll();
-	}
-	@Override
-	public Employee findByEmployeeId(int id) {
-		Optional<Employee> emp = employeeRepository.findByEmployeeId(id);
+public class EmployeeServiceImpl implements EmployeeService {
+    @Autowired
+    EmployeeRepository employeeRepository;
+
+    @Bean
+    RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
+
+    @Autowired
+    RestTemplate restTemplate;
+
+    @Override
+    public Employee createEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    @Override
+    public List<Employee> findAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
+    @Override
+    public Employee findByEmployeeId(Integer id) {
+        Optional<Employee> emp = employeeRepository.findById(id);
         if (emp.isPresent()) {
-        		Employee employee = emp.get();
-        		Allocation[] allocation = fetchAllocation(employee);
-        		employee.setAllocation(allocation);
-        		
-        		
-        
-           // ResponseEntity<Allocation[]> responseEntity = restTemplate.exchange("http://localhost:8181/allocationService/fetchAllAllocation/" + id, HttpMethod.POST, httpEntity, Allocation[].class);
+            Employee employee = emp.get();
 
-           // employee.setAllocations(responseEntity.getBody());
+            HttpHeaders httpHeaders = new HttpHeaders();
+            HttpEntity<String> httpEntity = new HttpEntity<String>("", httpHeaders);
 
+            ResponseEntity<Allocation[]> responseEntity = restTemplate.exchange(
+                    "http://localhost:8181/service/findByEmployeeId/" + id, HttpMethod.GET, httpEntity, Allocation[].class);
+
+            // if(responseEntity.getStatusCode().value()==200) {
+            //return responseEntity.getBody();
+            employee.setAllocation(responseEntity.getBody());
             return employee;
+
         } else {
             return null;
         }
-	}
-	
-	public Allocation[] fetchAllocation(Employee e) {
-		HttpHeaders httpHeaders = new HttpHeaders();
-		HttpEntity<String> httpEntity = new HttpEntity<String>(Body:"",httpEntity);
-		
-		ResponseEntity<Allocation[]> responseEntity = restTemplate.exchange("http://localhost:8181/service/findByEmployeeId/" + id, HttpMethod.POST, httpEntity, Allocation[].class);
-		 return new Allocation[0];
-		// if(responseEntity.getStatusCode().value()==200) {
-			 return responseEntity.getBody();
-		// }
-	
-	}
+    }
+
 
 }

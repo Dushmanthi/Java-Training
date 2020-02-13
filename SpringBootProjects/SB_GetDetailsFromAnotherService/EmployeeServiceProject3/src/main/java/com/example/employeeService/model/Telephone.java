@@ -20,7 +20,7 @@ public class Telephone {
 	String number;
 	
 	//ManyToOne
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn
     @JsonIgnore
 	Employee employee;

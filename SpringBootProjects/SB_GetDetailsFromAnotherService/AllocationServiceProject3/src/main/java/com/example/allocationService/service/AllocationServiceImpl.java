@@ -25,6 +25,7 @@ public class AllocationServiceImpl implements AllocationService{
 
     @Override
     public List<Allocation> getAllocationByEmployeeId(Integer id) {
-        return allocationRepository.findByEmployeeId(id);
+
+       return allocationRepository.findByEmpId(id);
     }
 }
