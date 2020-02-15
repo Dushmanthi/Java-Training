@@ -20,16 +20,16 @@ public class AllocationController {
 	@Autowired
 	AllocationService allocationService;
 
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public Allocation test() {
-		Allocation allocation=new Allocation();
-		allocation.setId(1);
-		allocation.setEmpId(1);
-		allocation.setStart("2001");
-		allocation.setEnd("2019");
-		allocation.setProjectCode("123");
-		return allocation;
-	}
+//	@RequestMapping(value = "/test", method = RequestMethod.GET)
+//	public Allocation test() {
+//		Allocation allocation=new Allocation();
+//		allocation.setId(1);
+//		allocation.setEmpId(1);
+//		allocation.setStart("2001");
+//		allocation.setEnd("2019");
+//		allocation.setProjectCode("123");
+//		return allocation;
+//	}
 
 	@RequestMapping(value = "/saveAllocation", method = RequestMethod.POST)
 	public Allocation save(@RequestBody Allocation allocation) {
@@ -44,7 +44,7 @@ public class AllocationController {
 	@RequestMapping(value= "/findByEmployeeId/{id}", method = RequestMethod.GET)  	
 	    	public List<Allocation> findById(@PathVariable Integer id) {
 	        return allocationService.getAllocationByEmployeeId(id);
-	     //   return allocationService.findById(id).getId();
+
 	    }
 
 }

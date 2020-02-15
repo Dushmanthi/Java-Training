@@ -27,19 +27,25 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.DiscoveryService" />
+    </key>
+  </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn install" />
       <command value="mvn clean install" />
+      <command value="mvn clean" />
     </option>
   </component>
   <component name="RunManager">
     <configuration name="DiscoveryServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.DiscoveryServiceApplication" />
+      <option name="MAIN_CLASS_NAME" value="com.example.DiscoveryService.DiscoveryServiceApplication" />
       <module name="DiscoveryService" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.*" />
+          <option name="PATTERN" value="com.example.DiscoveryService.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -102,29 +108,38 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="399" y="125" width="624" height="544" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/67.27.1299.741@67.27.1299.741" timestamp="1581623430885" />
+    <state x="471" y="284" width="484" height="244" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1581678192950">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state x="471" y="284" width="484" height="244" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/70.27.1296.741@70.27.1296.741" timestamp="1581678192950" />
     <state x="499" y="155" width="424" height="484" key="FileChooserDialogImpl" timestamp="1581623568337">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="499" y="155" width="424" height="484" key="FileChooserDialogImpl/67.27.1299.741@67.27.1299.741" timestamp="1581623568337" />
-    <state width="1233" height="228" key="GridCell.Tab.0.bottom" timestamp="1581630334222">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state width="1230" height="204" key="GridCell.Tab.0.bottom" timestamp="1581678752874">
+      <screen x="70" y="27" width="1296" height="741" />
     </state>
     <state width="1233" height="228" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1581630334222" />
-    <state width="1233" height="228" key="GridCell.Tab.0.center" timestamp="1581630334221">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state width="1230" height="204" key="GridCell.Tab.0.bottom/70.27.1296.741@70.27.1296.741" timestamp="1581678752874" />
+    <state width="1230" height="204" key="GridCell.Tab.0.center" timestamp="1581678752873">
+      <screen x="70" y="27" width="1296" height="741" />
     </state>
     <state width="1233" height="228" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1581630334221" />
-    <state width="1233" height="228" key="GridCell.Tab.0.left" timestamp="1581630334221">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state width="1230" height="204" key="GridCell.Tab.0.center/70.27.1296.741@70.27.1296.741" timestamp="1581678752873" />
+    <state width="1230" height="204" key="GridCell.Tab.0.left" timestamp="1581678752873">
+      <screen x="70" y="27" width="1296" height="741" />
     </state>
     <state width="1233" height="228" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1581630334221" />
-    <state width="1233" height="228" key="GridCell.Tab.0.right" timestamp="1581630334221">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state width="1230" height="204" key="GridCell.Tab.0.left/70.27.1296.741@70.27.1296.741" timestamp="1581678752873" />
+    <state width="1230" height="204" key="GridCell.Tab.0.right" timestamp="1581678752874">
+      <screen x="70" y="27" width="1296" height="741" />
     </state>
     <state width="1233" height="228" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1581630334221" />
-    <state x="380" y="176" width="672" height="677" key="run.anything.popup" timestamp="1581627731381">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state width="1230" height="204" key="GridCell.Tab.0.right/70.27.1296.741@70.27.1296.741" timestamp="1581678752874" />
+    <state x="382" y="176" width="672" height="677" key="run.anything.popup" timestamp="1581678103503">
+      <screen x="70" y="27" width="1296" height="741" />
     </state>
     <state x="380" y="176" width="672" height="677" key="run.anything.popup/67.27.1299.741@67.27.1299.741" timestamp="1581627731381" />
+    <state x="382" y="176" width="672" height="677" key="run.anything.popup/70.27.1296.741@70.27.1296.741" timestamp="1581678103503" />
   </component>
 </project>

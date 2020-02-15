@@ -1,5 +1,6 @@
 package com.example.employeeService.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -51,5 +52,11 @@ public class Employee {
 	//@Transient
 	Allocation[] allocation;
 
+	public List<Telephone> getTelephone() {
+		return telephone;
+	}
 
+	public void setTelephone(List<Telephone> telephone) {
+		this.telephone = telephone;
+	}
 }

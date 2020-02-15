@@ -23,34 +23,34 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public Employee test() {
-        Employee employee = new Employee();
-        employee.setName("Madu");
-        employee.setAge("25");
-
-        Address address=new Address();
-        address.setStreet("fxgf");
-        address.setCity("sffsgf");
-
-        List<Telephone> telephones1=new ArrayList<>();
-        Telephone t=new Telephone();
-        t.setNumber("1234567");
-        telephones1.add(t);
-        employee.setTelephone(telephones1);
-
-        List<Projects> projects=new ArrayList<>();
-        Projects projects1=new Projects();
-        projects1.setProjectName("p1");
-
-        Projects projects2=new Projects();
-        projects2.setProjectName("p2");
-        projects.add(projects1);
-        projects.add(projects2);
-        employee.setProjects(projects);
-        return employee;
-
-    }
+ //   @RequestMapping(value = "/test", method = RequestMethod.GET)
+//    public Employee test() {
+//        Employee employee = new Employee();
+//        employee.setName("Madu");
+//        employee.setAge("25");
+//
+//        Address address=new Address();
+//        address.setStreet("fxgf");
+//        address.setCity("sffsgf");
+//
+//        List<Telephone> telephones1=new ArrayList<>();
+//        Telephone t=new Telephone();
+//        t.setNumber("1234567");
+//        telephones1.add(t);
+//        employee.setTelephone(telephones1);
+//
+//        List<Projects> projects=new ArrayList<>();
+//        Projects projects1=new Projects();
+//        projects1.setProjectName("p1");
+//
+//        Projects projects2=new Projects();
+//        projects2.setProjectName("p2");
+//        projects.add(projects1);
+//        projects.add(projects2);
+//        employee.setProjects(projects);
+//        return employee;
+//
+//    }
 
     @RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
     public Employee save(@RequestBody Employee employee) {
