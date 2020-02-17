@@ -49,7 +49,7 @@ public class Employee {
 	
 	
 	//Allocation
-	//@Transient
+	@Transient
 	Allocation[] allocation;
 
 	public Allocation[] getAllocation() {
