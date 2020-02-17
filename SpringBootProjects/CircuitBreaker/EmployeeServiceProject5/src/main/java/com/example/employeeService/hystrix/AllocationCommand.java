@@ -4,7 +4,6 @@ import com.example.employeeService.model.Employee;
 import com.example.employeeService.sharedModel.Allocation;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
-import org.springframework.cloud.netflix.hystrix.HystrixCommands;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-public class AllocationCommand extends HystrixCommands<Allocation[]>{
+public class AllocationCommand extends HystrixCommand<Allocation[]>{
 
     Employee employee;
     HttpHeaders httpHeaders;
@@ -37,7 +36,7 @@ public class AllocationCommand extends HystrixCommands<Allocation[]>{
         return responseEntity.getBody();
     }
 
-    //@Override
+    @Override
     protected Allocation[] getFallback(){
         return new Allocation[1];
     }

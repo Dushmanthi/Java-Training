@@ -44,15 +44,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Allocation[] fetchAllocation(Employee employee) throws Exception {
+    public Allocation[] fetchAllocation(Employee employee) {
 
         HttpHeaders httpHeaders = new HttpHeaders();
         AllocationCommand allocationCommand = new AllocationCommand(employee, httpHeaders, restTemplate);
-        return allocationCommand.run();
+        return allocationCommand.execute();
     }
 
     @Override
-    public Employee findByEmployeeId(Integer id) throws Exception {
+    public Employee findByEmployeeId(Integer id)  {
         Optional<Employee> emp = employeeRepository.findById(id);
         if (emp.isPresent()) {
             Employee employee = emp.get();
@@ -71,14 +71,5 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
-
-//    @Override
-//    public Allocation[] findByEmployeeId(Employee e) throws Exception {
-//        Employee employee = new Employee();
-//        RestTemplate restTemplate = new RestTemplate();
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        AllocationCommand allocationCommand=new AllocationCommand(employee,httpHeaders,restTemplate);
-//        return allocationCommand.run();
-//    }
 
 }

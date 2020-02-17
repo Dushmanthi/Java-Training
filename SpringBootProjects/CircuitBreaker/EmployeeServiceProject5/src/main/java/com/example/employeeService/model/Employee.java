@@ -21,6 +21,7 @@ import com.example.employeeService.sharedModel.Allocation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.data.annotation.Transient;
 
 @Entity
 @Data
@@ -49,7 +50,7 @@ public class Employee {
 	
 	
 	//Allocation
-	//@Transient
+	@Transient
 	Allocation[] allocation;
 
 	public List<Telephone> getTelephone() {
@@ -61,9 +62,7 @@ public class Employee {
 	}
 
 
-	public Allocation[] getAllocation() {
-		return allocation;
-	}
+
 
 	public Integer getId() {
 		return id;
@@ -72,6 +71,10 @@ public class Employee {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+//	public Allocation[] getAllocation() {
+//		return allocation;
+//	}
 
 	public void setAllocation(Allocation[] allocation) {
 		this.allocation = allocation;

@@ -25,15 +25,16 @@ public class AllocationServiceImpl implements AllocationService{
 
     @Override
     public List<Allocation> getAllocationByEmployeeId(Integer id) {
-       return  allocationRepository.findByEmpId(id);
+
             System.out.println("AllocaterService_1");
-            Allocation allocation = new Allocation();
-            allocation.setEmpId(id);
+         return  allocationRepository.findByEmpId(id);
 
-            Example<Allocation> example = Example.of(allocation);
-
-            List<Allocation> all = allocationRepository.findByEmpId(id);
-
-            return all;
+//            Allocation allocation = new Allocation();
+//            allocation.setEmpId(id);
+//
+//           // Example<Allocation> example = Example.of(allocation);
+//
+//            List<Allocation> allocations = allocationRepository.findByEmpId(id);
+//            return allocations;
         }
 }

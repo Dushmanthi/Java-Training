@@ -10,5 +10,5 @@ public interface EmployeeService {
 	
 	public List<Employee> findAllEmployees();
 	
-	public Employee findByEmployeeId(Integer id) throws Exception;
+	public Employee findByEmployeeId(Integer id);
 }
