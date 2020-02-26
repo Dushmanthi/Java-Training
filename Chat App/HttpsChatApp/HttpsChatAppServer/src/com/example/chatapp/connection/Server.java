@@ -82,6 +82,7 @@ class Server {
             httpsServer.createContext("/register", new registerClient());
             httpsServer.createContext("/send", new sendMessages());
             httpsServer.createContext("/test", new MyHandler());
+            httpsServer.createContext("/disconnect", new disconnect());
             httpsServer.setExecutor(null);
             httpsServer.start();
             System.out.println("server started ");
@@ -90,7 +91,8 @@ class Server {
             System.out.println("Failed to create HTTPS server on port " + 8080 + " of localhost");
             exception.printStackTrace();
 
-        }}/*
+        }
+    }/*
 		// load certificate
 String keystoreFilename = getPath() + "testkey.jks";
 char[] storepass = "password".toCharArray();
@@ -134,40 +136,72 @@ server.setHttpsConfigurator(new HttpsConfigurator(sslContext) {
          }
 });*/
 
-        public static class registerClient implements HttpHandler {
-            @Override
-            public void handle(HttpExchange he) throws IOException {
-                Map<String, Object> parameters = new HashMap<String, Object>();
-                URI requestedUri = he.getRequestURI();
-                String query = requestedUri.getRawQuery();
+    public static class registerClient implements HttpHandler {
+        @Override
+        public void handle(HttpExchange httpExchange) throws IOException {
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            URI requestedUri = httpExchange.getRequestURI();
+            String query = requestedUri.getRawQuery();
 
-                String clientName = query.substring(query.indexOf("=") + 1, query.length());
-                System.out.println(clientName);
+            String clientName = query.substring(query.indexOf("=") + 1, query.length());
+            System.out.println(clientName);
 
-                String response = "You are registered !";
+            String response = "You are registered !";
 
-                if (clients.keySet().stream().anyMatch(clientName::equals)) {
-                    System.out.println("client Already Present !");
-                    response = "client Already Present !";
-                } else {
-                    clients.put(clientName, new ArrayList());
-                }
-
-                System.out.println(clients);
-                // send response
-                he.sendResponseHeaders(200, response.length());
-                OutputStream outputStream = he.getResponseBody();
-                outputStream.write(response.toString().getBytes());
-
-                outputStream.close();
+            if (clients.keySet().stream().anyMatch(clientName::equals)) {
+                System.out.println("client Already Present !");
+                response = "client Already Present !";
+            } else {
+                clients.put(clientName, new ArrayList());
             }
+
+            System.out.println(clients);
+
+            httpExchange.sendResponseHeaders(200, response.length());
+            OutputStream outputStream = httpExchange.getResponseBody();
+            outputStream.write(response.toString().getBytes());
+
+            outputStream.close();
         }
+    }
 
 
-        public static class listofClient implements HttpHandler {
-            @Override
-            public void handle(HttpExchange he) throws IOException {
-                // parse request
+    public static class listofClient implements HttpHandler {
+        @Override
+        public void handle(HttpExchange he) throws IOException {
+            // parse request
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            URI requestedUri = he.getRequestURI();
+            String query = requestedUri.getRawQuery();
+
+            String clientName = query.substring(query.indexOf("=") + 1, query.length());
+            System.out.println(clientName);
+
+            String response = "";
+
+            for (String name : clients.keySet()) {
+                if (clientName.equals(name)) {
+                    response += clientName + "(You)\n";
+                } else {
+                    response += name + "\n";
+                }
+            }
+
+            System.out.println(clients + "Sended");
+            // send response
+            he.sendResponseHeaders(200, response.length());
+            OutputStream os = he.getResponseBody();
+            os.write(response.toString().getBytes());
+
+            os.close();
+        }
+    }
+
+    public static class getMyMessage implements HttpHandler {
+        @Override
+        public void handle(HttpExchange he) throws IOException {
+            try {
+
                 Map<String, Object> parameters = new HashMap<String, Object>();
                 URI requestedUri = he.getRequestURI();
                 String query = requestedUri.getRawQuery();
@@ -175,108 +209,104 @@ server.setHttpsConfigurator(new HttpsConfigurator(sslContext) {
                 String clientName = query.substring(query.indexOf("=") + 1, query.length());
                 System.out.println(clientName);
 
-                String response = "";
-
-                for (String name : clients.keySet()) {
-                    if (clientName.equals(name)) {
-                        response += clientName + "(You)\n";
-                    } else {
-                        response += name + "\n";
+                String response = "No messages for this clients";
+                if (clients.get(clientName).size() > 1) {
+                    for (String name : clients.keySet()) {
+                        if (clientName.equals(name)) {
+                            response += clients.get(name).get(1);
+                            clients.get(name).set(1, "");
+                        }
                     }
                 }
 
                 System.out.println(clients + "Sended");
                 // send response
                 he.sendResponseHeaders(200, response.length());
+                OutputStream outputStream = he.getResponseBody();
+                outputStream.write(response.toString().getBytes());
+
+                outputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static class sendMessages implements HttpHandler {
+        @Override
+        public void handle(HttpExchange he) throws IOException {
+
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            URI requestedUri = he.getRequestURI();
+            String query = requestedUri.getRawQuery();
+
+            System.out.println(parameters);
+            try {
+                Matcher matcher2 = Pattern.compile("message=(?<msg>\\w*)&receiver=(?<rec>\\w*)&sender=(?<sen>\\w*)").matcher(query);
+                if (matcher2.find()) {
+                    System.out.println("message: " + matcher2.group("msg"));
+                    System.out.println("receiver name: " + matcher2.group("rec"));
+                    System.out.println("sender name: " + matcher2.group("sen"));
+
+                    String message = matcher2.group("msg");
+                    String receiver = matcher2.group("rec");
+                    String sender = matcher2.group("sen");
+
+
+                    clients.keySet().forEach(name -> {
+                        if (receiver.equals(name)) {
+                            clients.get(name).add(0, new ArrayList<String>());
+                            clients.get(name).add(1, sender + "->" + message);
+                        }
+                    });
+
+                    System.out.println(clients.values());
+
+                    String response = "messeges sended to " + receiver;
+
+                    he.sendResponseHeaders(200, response.length());
+                    OutputStream os = he.getResponseBody();
+                    os.write(response.toString().getBytes());
+
+                    os.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
+
+    public static class disconnect implements HttpHandler {
+        @Override
+        public void handle(HttpExchange he) throws IOException {
+
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            URI requestedUri = he.getRequestURI();
+            String query = requestedUri.getRawQuery();
+
+            System.out.println(parameters);
+            try {
+                String clientName = query.substring(query.indexOf("=") - 1, query.length());
+                System.out.println(clientName);
+                clients.remove(clientName);
+
+                String response = "User doesn't exist";
+                response = "Disconnected";
+
+                he.sendResponseHeaders(200, response.length());
                 OutputStream os = he.getResponseBody();
                 os.write(response.toString().getBytes());
-
-                os.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                he.close();
             }
-        }
-
-        public static class getMyMessage implements HttpHandler {
-            @Override
-            public void handle(HttpExchange he) throws IOException {
-                try {
-
-                    Map<String, Object> parameters = new HashMap<String, Object>();
-                    URI requestedUri = he.getRequestURI();
-                    String query = requestedUri.getRawQuery();
-
-                    String clientName = query.substring(query.indexOf("=") + 1, query.length());
-                    System.out.println(clientName);
-
-                    String response = "No messages for this clients";
-                    if ( clients.get(clientName).size() >1) {
-                        for (String name : clients.keySet()) {
-                            if (clientName.equals(name)) {
-                                response += clients.get(name).get(1);
-                                clients.get(name).set(1, "");
-                            }
-                        }
-                    }
-
-                    System.out.println(clients + "Sended");
-                    // send response
-                    he.sendResponseHeaders(200, response.length());
-                    OutputStream outputStream = he.getResponseBody();
-                    outputStream.write(response.toString().getBytes());
-
-                    outputStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        public static class sendMessages implements HttpHandler {
-            @Override
-            public void handle(HttpExchange he) throws IOException {
-
-                Map<String, Object> parameters = new HashMap<String, Object>();
-                URI requestedUri = he.getRequestURI();
-                String query = requestedUri.getRawQuery();
-
-                System.out.println(parameters);
-                try {
-                    Matcher matcher2 = Pattern.compile("message=(?<msg>\\w*)&receiver=(?<rec>\\w*)&sender=(?<sen>\\w*)").matcher(query);
-                    if (matcher2.find()) {
-                        System.out.println("message: " + matcher2.group("msg"));
-                        System.out.println("receiver name: " + matcher2.group("rec"));
-                        System.out.println("sender name: " + matcher2.group("sen"));
-
-                        String message = matcher2.group("msg");
-                        String receiver = matcher2.group("rec");
-                        String sender = matcher2.group("sen");
 
 
-                        clients.keySet().forEach(name -> {
-                            if (receiver.equals(name)) {
-                                clients.get(name).add(0, new ArrayList<String>());
-                                clients.get(name).add(1, sender + "->" + message);
-                            }
-                        });
-
-                        System.out.println(clients.values());
-
-                        String response = "messeges sended to " + receiver;
-
-
-                        // send response
-                        he.sendResponseHeaders(200, response.length());
-                        OutputStream os = he.getResponseBody();
-                        os.write(response.toString().getBytes());
-
-                        os.close();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-            }
         }
 
     }
 
+}

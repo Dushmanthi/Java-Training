@@ -4,7 +4,6 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -14,7 +13,7 @@ class Client
 {
 
     private static String ip = "localhost", name = "dushi", port = "8080";
-
+    private static boolean isConnected=false;
 
     static {
         javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
@@ -82,7 +81,7 @@ class Client
                         getList();
                     }
 
-                    if (Pattern.matches("send (?<msg>.*)->(?<name>.*)", sendToServer)) {
+                    if (Pattern.matches("send (?<msg>.*) to (?<name>.*)", sendToServer)) {
                         sendToServer(sendToServer);
                     }
 
@@ -97,7 +96,7 @@ class Client
                 while (true) {
 
                     try {
-                        Thread.sleep(10000);
+                        Thread.sleep(15000);
                         String httpsURL1 = "https://127.0.0.1:8080/inbox?name=" + name;
                         URL url1 = new URL(httpsURL1);
                         HttpsURLConnection conn1 = (HttpsURLConnection) url1.openConnection();
@@ -194,6 +193,30 @@ class Client
                     System.out.println(inputLine1);
                 } else {
                     System.out.println("NO messages !");
+                }
+            }
+            br1.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void disconnect() {
+        try {
+            String httpsURL1 = "https://127.0.0.1:8080/disconnect?name=" + name;
+            URL url1 = new URL(httpsURL1);
+            HttpsURLConnection conn1 = (HttpsURLConnection) url1.openConnection();
+            InputStream is1 = conn1.getInputStream();
+            InputStreamReader isr1 = new InputStreamReader(is1);
+            BufferedReader br1 = new BufferedReader(isr1);
+            String inputLine1;
+            while ((inputLine1 = br1.readLine()) != null) {
+                if (!inputLine1.equals("Disconnected")) {
+                    System.out.println(inputLine1);
+                    isConnected = false;
+                    name = null;
+                } else {
+                    System.out.println("Still connected !");
                 }
             }
             br1.close();

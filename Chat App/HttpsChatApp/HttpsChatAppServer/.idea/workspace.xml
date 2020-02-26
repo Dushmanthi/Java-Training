@@ -101,25 +101,25 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1276" height="225" key="GridCell.Tab.0.bottom" timestamp="1582669207671">
+    <state width="1276" height="125" key="GridCell.Tab.0.bottom" timestamp="1582678798179">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1276" height="225" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1582669207671" />
+    <state width="1276" height="125" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1582678798179" />
     <state width="1250" height="117" key="GridCell.Tab.0.bottom/70.27.1296.741@70.27.1296.741" timestamp="1582630771394" />
-    <state width="1276" height="225" key="GridCell.Tab.0.center" timestamp="1582669207670">
+    <state width="1276" height="125" key="GridCell.Tab.0.center" timestamp="1582678798179">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1276" height="225" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1582669207670" />
+    <state width="1276" height="125" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1582678798179" />
     <state width="1250" height="117" key="GridCell.Tab.0.center/70.27.1296.741@70.27.1296.741" timestamp="1582630771394" />
-    <state width="1276" height="225" key="GridCell.Tab.0.left" timestamp="1582669207669">
+    <state width="1276" height="125" key="GridCell.Tab.0.left" timestamp="1582678798178">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1276" height="225" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1582669207669" />
+    <state width="1276" height="125" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1582678798178" />
     <state width="1250" height="117" key="GridCell.Tab.0.left/70.27.1296.741@70.27.1296.741" timestamp="1582630771393" />
-    <state width="1276" height="225" key="GridCell.Tab.0.right" timestamp="1582669207670">
+    <state width="1276" height="125" key="GridCell.Tab.0.right" timestamp="1582678798179">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1276" height="225" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1582669207670" />
+    <state width="1276" height="125" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1582678798179" />
     <state width="1250" height="117" key="GridCell.Tab.0.right/70.27.1296.741@70.27.1296.741" timestamp="1582630771394" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
