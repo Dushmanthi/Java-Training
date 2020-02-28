@@ -126,7 +126,7 @@ class Client
             if (matcher.find()) {
                 System.out.println("message: " + matcher.group("message"));
                 System.out.println("receiver name: " + matcher.group("name"));
-                String message = matcher.group("msg");
+                String message = matcher.group("message");
                 String receiver = matcher.group("name");
                 String sender = name;
                 System.out.println("sender :" + name);
