@@ -38,6 +38,7 @@ class Client
         String command = scanner.nextLine();
         Pattern regex = Pattern.compile("^connect " +
                 "(?<ip>((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))" +
+//                "(?<ip>((\\d{3})\\.){3}(\\d{3}))" +
                 ":(?<port>\\d{4})" +
                 " as " +
                 "(?<name>\\w*)$");
@@ -113,7 +114,7 @@ class Client
             }).start();
 
         } else {
-            System.out.println("Wrong Command !");
+            System.out.println("Wrong Command please follow the pattern");
         }
     }
 
@@ -124,12 +125,9 @@ class Client
 
             Matcher matcher = Pattern.compile("send (?<message>.*)->(?<name>.*)").matcher(sendToServer);
             if (matcher.find()) {
-                System.out.println("message: " + matcher.group("message"));
-                System.out.println("receiver name: " + matcher.group("name"));
-                String message = matcher.group("msg");
-                String receiver = matcher.group("name");
                 String sender = name;
-                System.out.println("sender :" + name);
+                String message = matcher.group("message");
+                String receiver = matcher.group("name");
 
                 String httpsURL1 = "https://127.0.0.1:9000/send?message=" + message + "&receiver=" + receiver + "&sender=" + sender;
                 URL url = new URL(httpsURL1);
@@ -140,7 +138,8 @@ class Client
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String inputLine;
                 while ((inputLine = bufferedReader.readLine()) != null) {
-                    System.out.println(inputLine);
+                    System.out.print("("+name+" sent "+matcher.group("message")+" to"+inputLine+" )\n");
+
                 }
                 bufferedReader.close();
             }
@@ -184,7 +183,7 @@ class Client
                 if (!inputLine.equals("no")) {
                     System.out.println(inputLine);
                 } else {
-                    System.out.println("NO messages !");
+                    System.out.println("No messages !");
                 }
             }
             bufferedReader.close();

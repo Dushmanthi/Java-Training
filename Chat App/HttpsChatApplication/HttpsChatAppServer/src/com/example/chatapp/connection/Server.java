@@ -69,7 +69,7 @@ class Server {
 
                         SSLParameters sslParameters = context.getSupportedSSLParameters();
                         httpsParameters.setSSLParameters(sslParameters);
-                        System.out.println("HTTPS port created successfully");
+                        System.out.println("Connected....");
 
                     } catch (Exception ex) {
                         System.out.println("Failed to create HTTPS port");
@@ -82,9 +82,10 @@ class Server {
             httpsServer.createContext("/inbox", new getMyMessage());
             httpsServer.createContext("/list", new listofClient());
             httpsServer.createContext("/disconnect", new disconnect());
+
             httpsServer.setExecutor(null);
             httpsServer.start();
-            System.out.println("server started ");
+            System.out.println("server booted ");
 
         } catch (Exception exception) {
             System.out.println("Failed to create HTTPS server on port " + 9000 + " of localhost");
@@ -168,7 +169,7 @@ server.setHttpsConfigurator(new HttpsConfigurator(sslContext) {
     public static class listofClient implements HttpHandler {
         @Override
         public void handle(HttpExchange httpExchange) throws IOException {
-            // parse request
+
             Map<String, Object> parameters = new HashMap<String, Object>();
             URI uri = httpExchange.getRequestURI();
             String query = uri.getRawQuery();
@@ -186,7 +187,7 @@ server.setHttpsConfigurator(new HttpsConfigurator(sslContext) {
                 }
             }
 
-            System.out.println(clients + "Sended");
+            System.out.println(clients + "Message Sent successfully");
 
             httpExchange.sendResponseHeaders(200, response.length());
             OutputStream outputStream = httpExchange.getResponseBody();
@@ -218,7 +219,7 @@ server.setHttpsConfigurator(new HttpsConfigurator(sslContext) {
                     }
                 }
 
-                System.out.println(clients + "Sended");
+                System.out.println(clients + "Message received successfully");
 
                 httpExchange.sendResponseHeaders(200, response.length());
                 OutputStream outputStream = httpExchange.getResponseBody();
@@ -243,13 +244,12 @@ server.setHttpsConfigurator(new HttpsConfigurator(sslContext) {
             try {
                 Matcher matcher= Pattern.compile("message=(?<message>\\w*)&receiver=(?<receiver>\\w*)&sender=(?<sender>\\w*)").matcher(query);
                 if (matcher.find()) {
-                    System.out.println("message: " + matcher.group("message"));
-                    System.out.println("receiver name: " + matcher.group("receiver"));
-                    System.out.println("sender name: " + matcher.group("sender"));
 
                     String message = matcher.group("message");
                     String receiver = matcher.group("receiver");
                     String sender = matcher.group("sender");
+
+                    System.out.print("("+sender+" sent "+message+" to "+receiver+" )\n");
 
                     clients.keySet().forEach(name -> {
                         if (receiver.equals(name)) {
@@ -260,7 +260,7 @@ server.setHttpsConfigurator(new HttpsConfigurator(sslContext) {
 
                     System.out.println(clients.values());
 
-                    String response = "messeges sent to: " + receiver;
+                    String response = " " + receiver;
 
                     httpExchange.sendResponseHeaders(200, response.length());
                     OutputStream outputStream = httpExchange.getResponseBody();
