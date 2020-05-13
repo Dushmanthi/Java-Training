@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Wed May 13 13:20:53 IST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0172-0d03-d148-000002c54388 
+on database directory memory:/home/user/Desktop/Virtusa projects/Design Patterns/Creational Design Patterns/Singleton/sample with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/home/user/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_201-b09
+user.dir=/home/user/Desktop/Virtusa projects/Design Patterns/Creational Design Patterns/Singleton
+os.name=Linux
+os.arch=amd64
+os.version=4.15.0-96-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
