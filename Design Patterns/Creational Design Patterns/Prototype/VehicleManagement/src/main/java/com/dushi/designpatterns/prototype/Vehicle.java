@@ -1,4 +1,4 @@
-package com.dushi.designpatterns.singleton.Prototype;
+package com.dushi.designpatterns.prototype;
 
 public abstract class Vehicle implements Cloneable{
 

@@ -1,4 +1,4 @@
-package com.dushi.designpatterns.singleton.Prototype;
+package com.dushi.designpatterns.prototype;
 
 public class Bus extends Vehicle{
     private int numberOfSeats;

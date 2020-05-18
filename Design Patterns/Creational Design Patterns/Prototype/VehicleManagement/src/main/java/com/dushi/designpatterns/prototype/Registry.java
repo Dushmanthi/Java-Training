@@ -1,4 +1,4 @@
-package com.dushi.designpatterns.singleton.Prototype;
+package com.dushi.designpatterns.prototype;
 
 import java.util.HashMap;
 import java.util.Map;

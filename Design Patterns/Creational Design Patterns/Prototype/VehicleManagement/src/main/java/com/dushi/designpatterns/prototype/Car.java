@@ -1,4 +1,4 @@
-package com.dushi.designpatterns.singleton.Prototype;
+package com.dushi.designpatterns.prototype;
 
 public class Car extends Vehicle{
     private String type;
