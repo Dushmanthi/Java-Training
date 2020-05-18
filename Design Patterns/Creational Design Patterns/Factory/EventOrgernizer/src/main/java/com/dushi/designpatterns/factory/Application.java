@@ -1,6 +1,4 @@
-package com.dushi.designpatterns.singleton.FactoyMethod;
-
-import java.text.NumberFormat;
+package com.dushi.designpatterns.factory;
 
 public class Application {
     public static void main(String[] args) {

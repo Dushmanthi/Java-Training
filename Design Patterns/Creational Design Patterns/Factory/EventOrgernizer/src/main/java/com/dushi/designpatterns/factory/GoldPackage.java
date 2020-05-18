@@ -1,4 +1,4 @@
-package com.dushi.designpatterns.singleton.FactoyMethod;
+package com.dushi.designpatterns.factory;
 
 public class GoldPackage extends Package {
     @Override

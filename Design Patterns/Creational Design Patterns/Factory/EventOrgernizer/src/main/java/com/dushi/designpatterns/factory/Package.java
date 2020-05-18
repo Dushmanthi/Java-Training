@@ -1,4 +1,4 @@
-package com.dushi.designpatterns.singleton.FactoyMethod;
+package com.dushi.designpatterns.factory;
 
 import java.util.ArrayList;
 import java.util.List;
